@@ -1,0 +1,17 @@
+{
+    "name": "sukunabikona",
+    "version": "0.0.1",
+    "description": "wp-env を使用した最小限の開発環境",
+    "scripts": {
+        "wp-env": "wp-env"
+    },
+    "author": "Arm Band",
+    "license": "ISC",
+    "devDependencies": {
+        "@wordpress/env": "*"
+    },
+    "engines": {
+        "node": ">= 12.0.0",
+        "npm": ">= 6.0.0"
+    }
+}

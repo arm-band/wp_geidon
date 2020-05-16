@@ -1,0 +1,13 @@
+{
+    "core": "https://ja.wordpress.org/latest-ja.zip",
+    "plugins": [
+        ".",
+        "https://downloads.wordpress.org/plugin/wp-multibyte-patch.latest-stable.zip"
+    ],
+    "themes": [
+        "./wp-content/themes/sukunabikona"
+    ],
+    "mappings": {
+        "wp-content/themes/sukunabikona": "./wp-content/themes/sukunabikona"
+    }
+}
