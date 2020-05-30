@@ -2,7 +2,9 @@
     "core": "https://ja.wordpress.org/latest-ja.zip",
     "plugins": [
         ".",
-        "https://downloads.wordpress.org/plugin/wp-multibyte-patch.latest-stable.zip"
+        "https://downloads.wordpress.org/plugin/wp-multibyte-patch.latest-stable.zip",
+        "https://downloads.wordpress.org/plugin/show-current-template.latest-stable.zip",
+        "https://downloads.wordpress.org/plugin/wordpress-importer.latest-stable.zip"
     ],
     "themes": [
         "./wp-content/themes/sukunabikona"
