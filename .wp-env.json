@@ -8,8 +8,5 @@
     ],
     "themes": [
         "./wp-content/themes/sukunabikona"
-    ],
-    "mappings": {
-        "wp-content/themes/sukunabikona": "./wp-content/themes/sukunabikona"
-    }
+    ]
 }
