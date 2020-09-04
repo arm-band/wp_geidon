@@ -18,7 +18,7 @@
         <p id="himushi"></p>
     </main>
     <footer class="l-footer">
-        © 2020- <?php bloginfo( 'name' ); ?>.
+        © 2020- <?php bloginfo( 'name' ); ?>
     </footer>
     <?php wp_footer(); ?>
 </body>

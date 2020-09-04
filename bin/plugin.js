@@ -1,9 +1,8 @@
 module.exports = {
-    browserSync: require('browser-sync'),
+    browserSync: require('browser-sync').create(),
     dotenv: require('dotenv').config(),
     fs: require('fs'),
     gulp:  require('gulp'),
-    watch: require('gulp-watch'),
     plumber: require('gulp-plumber'),
     notify: require('gulp-notify'),
     sass:  require('gulp-sass'),

@@ -6,7 +6,12 @@ const jsBuild = () => {
     if(process.env.DEV_MODE === 'true') {
         objGulp = objGulp.pipe(_.sourcemaps.init())
     }
-    objGulp = objGulp.pipe(_.plumber())
+    objGulp = objGulp.pipe(_.plumber({
+            errorHandler: _.notify.onError({
+                message: 'Error: <%= error.message %>',
+                title: 'jsBuild'
+            })
+        }))
         .pipe(_.uglify({
             output: {
                 comments: 'some'

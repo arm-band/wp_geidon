@@ -1,28 +1,28 @@
 {
     "name": "sukunabikona",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "wp-env を使用した最小限の開発環境",
     "main": "gulpfile.js",
     "scripts": {
         "wp:start": "wp-env start",
         "wp:stop": "wp-env stop",
         "gulp": "gulp",
-        "start": "npm-run-all -s setting_env gulp",
-        "restart": "gulp",
+        "start": "npm-run-all -s setting_env wp:start gulp",
+        "restart": "npm-run-all -s wp:stop wp:start gulp",
         "setting_env": "node ./bin/tasks/settingenv"
     },
     "author": "Arm Band",
     "license": "ISC",
     "devDependencies": {
-        "@wordpress/env": "^1.4.0",
-        "browser-sync": "^2.26.7",
+        "@wordpress/env": "^2.0.0",
+        "browser-sync": "^2.26.12",
         "dotenv": "^8.2.0",
         "gulp": "^4.0.2",
         "gulp-imagemin": "^7.1.0",
-        "imagemin-mozjpeg": "^8.0.0",
-        "imagemin-pngquant": "^8.0.0",
+        "imagemin-mozjpeg": "^9.0.0",
+        "imagemin-pngquant": "^9.0.0",
         "imagemin-gifsicle": "^7.0.0",
-        "imagemin-svgo": "^7.1.0",
+        "imagemin-svgo": "^8.0.0",
         "gulp-notify": "^3.2.0",
         "gulp-plumber": "^1.2.1",
         "gulp-rename": "^2.0.0",
@@ -34,8 +34,8 @@
         "npm-run-all": "^4.1.5"
     },
     "engines": {
-        "node": ">=12.0.0",
-        "npm": ">=6.0.0"
+        "node": ">=14.0.0",
+        "npm": ">=6.14.4"
     },
     "engineStrict": true
 }
