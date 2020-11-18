@@ -6,7 +6,7 @@ module.exports = {
         img    : './src/img'
     },
     dist: {
-        themes : './wp-content/themes/sukunabikona',
+        themes : './wp-content/themes/geidon',
         css    : '/css',
         js     : '/js',
         img    : '/img'

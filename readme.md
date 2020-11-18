@@ -1,4 +1,4 @@
-# Sukunabikona
+# Geidon (鯨呑)
 
 ## Abstract
 

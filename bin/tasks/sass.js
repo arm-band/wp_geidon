@@ -1,4 +1,6 @@
 const _   = require('../plugin');
+_.sass.compiler = require('sass');
+const Fiber = require('fibers');
 const dir = require('../dir');
 
 //scssコンパイルタスク
@@ -15,6 +17,7 @@ const scss = () => {
             })
         }))
         .pipe(_.sass({
+            fiber: Fiber,
             outputStyle: 'compressed'
         }).on('error', _.sass.logError))
         .pipe(_.autoprefixer({

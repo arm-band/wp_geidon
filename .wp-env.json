@@ -6,6 +6,6 @@
         "https://downloads.wordpress.org/plugin/wordpress-importer.latest-stable.zip"
     ],
     "themes": [
-        "./wp-content/themes/sukunabikona"
+        "./wp-content/themes/geidon"
     ]
 }

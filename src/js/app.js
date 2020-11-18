@@ -1,2 +1,2 @@
-const himushi = document.querySelector('#himushi');
-himushi.innerText = 'I\'m clothed in moth-skin.';
+const himushi = document.querySelector('#geiin');
+himushi.innerText = '鯨飲馬食するなど。';

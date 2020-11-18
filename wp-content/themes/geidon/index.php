@@ -14,11 +14,11 @@
     </header>
     <div class="l-eyecatch"></div>
     <main class="l-main">
-        <p><?= "I came by the Amenokagaminofune."; ?></p>
-        <p id="himushi"></p>
+        <p><?= "蚕食鯨呑。"; ?></p>
+        <p id="geiin"></p>
     </main>
     <footer class="l-footer">
-        © 2020- <?php bloginfo( 'name' ); ?>
+        © 2020 <?php bloginfo( 'name' ); ?>
     </footer>
     <?php wp_footer(); ?>
 </body>
