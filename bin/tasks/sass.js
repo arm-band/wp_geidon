@@ -1,33 +1,39 @@
-const _   = require('../plugin');
-_.sass.compiler = require('sass');
-const Fiber = require('fibers');
-const dir = require('../dir');
+const { src, dest } = require('gulp');
+const plumber       = require('gulp-plumber');
+const notify        = require('gulp-notify');
+const sass          = require('gulp-sass')(require('sass'));
+const autoprefixer  = require('gulp-autoprefixer');
+const sourcemaps    = require('gulp-sourcemaps');
+const dir           = require('../dir');
+const dotenv        = require('dotenv').config();
 
 //scssコンパイルタスク
 const scss = () => {
-    let objGulp = _.gulp.src(`${dir.src.scss}/**/*.scss`);
-    if(process.env.DEV_MODE === 'true') {
-        objGulp = objGulp.pipe(_.sourcemaps.init())
+    let objGulp = src(
+        `${dir.src.scss}/**/*.scss`
+    );
+    if(process.env.DEV_MODE === 'dev') {
+        objGulp = objGulp.pipe(sourcemaps.init());
     }
     objGulp = objGulp
-        .pipe(_.plumber({
-            errorHandler: _.notify.onError({
+        .pipe(plumber({
+            errorHandler: notify.onError({
                 message: 'Error: <%= error.message %>',
                 title: 'sass'
             })
         }))
-        .pipe(_.sass({
-            fiber: Fiber,
-            outputStyle: 'compressed'
-        }).on('error', _.sass.logError))
-        .pipe(_.autoprefixer({
+        .pipe(sass({
+            outputStyle: 'compressed',
+            quietDeps: true
+        }).on('error', sass.logError))
+        .pipe(autoprefixer({
             cascade: false
-        }))
-    if(process.env.DEV_MODE === 'true') {
-        objGulp = objGulp.pipe(_.sourcemaps.write())
-    }
-    objGulp = objGulp.pipe(_.gulp.dest(`${dir.dist.themes}${dir.dist.css}`));
-    return objGulp;
+        }));
+        if(process.env.DEV_MODE === 'dev') {
+            objGulp = objGulp.pipe(sourcemaps.write())
+        }
+        objGulp = objGulp.pipe(dest(`${dir.dist.themes}${dir.dist.css}`));
+        return objGulp;
 };
 
 module.exports = scss;

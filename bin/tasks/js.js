@@ -1,31 +1,24 @@
-const _   = require('../plugin');
-const dir = require('../dir');
+const { dest }      = require('gulp');
+const plumber       = require('gulp-plumber');
+const notify        = require('gulp-notify');
+const rename        = require('gulp-rename');
+const webpackStream = require('webpack-stream');
+const dir           = require('../dir');
+const webpackConfig = require('../../webpack.config');
 
 const jsBuild = () => {
-    let objGulp = _.gulp.src(`${dir.src.js}/**/*.js`);
-    if(process.env.DEV_MODE === 'true') {
-        objGulp = objGulp.pipe(_.sourcemaps.init())
-    }
-    objGulp = objGulp.pipe(_.plumber({
-            errorHandler: _.notify.onError({
+    return webpackStream(webpackConfig)
+        .pipe(plumber({
+            errorHandler: notify.onError({
                 message: 'Error: <%= error.message %>',
-                title: 'jsBuild'
+                title: 'jsLibBuild'
             })
         }))
-        .pipe(_.uglify({
-            output: {
-                comments: 'some'
-            }
-        }))
-        .pipe(_.rename((path) => {
+        .pipe(rename((path) => {
             path.basename += '.min'
             path.extname = '.js'
-        }));
-    if(process.env.DEV_MODE === 'true') {
-        objGulp = objGulp.pipe(_.sourcemaps.write())
-    }
-    objGulp = objGulp.pipe(_.gulp.dest(`${dir.dist.themes}${dir.dist.js}`));
-    return objGulp;
+        }))
+        .pipe(dest(`${dir.dist.themes}${dir.dist.js}`));
 };
 
 module.exports = jsBuild;

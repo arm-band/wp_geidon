@@ -1,41 +1,40 @@
-const _        = require('../plugin');
-const dir      = require('../dir');
-const imagemin = require('./imagemin');
-const jsBuild  = require('./js');
-const scss     = require('./sass');
+const { series, watch } = require('gulp');
+const browserSync       = require('browser-sync').create();
+const dir               = require('../dir');
+const imagemin          = require('./imagemin');
+const jsBuild           = require('./js');
+const sass              = require('./sass');
+const dotenv            = require('dotenv').config();
 
 //自動リロード
 const browsersync = () => {
-    _.browserSync.init({
-            proxy: `${process.env.PROXY_HOST}:${process.env.PROXY_PORT}`
-        });
+    browserSync.init({
+        proxy: `${process.env.PROXY_HOST}:${process.env.PROXY_PORT}`
+    });
 
-        _.gulp.watch(
-            `${dir.dist.themes}/**/*.php`
-        )
-        .on('add',    _.browserSync.reload)
-        .on('change', _.browserSync.reload)
-        .on('unlink', _.browserSync.reload);
-    const sSass = _.gulp.series(scss, _.browserSync.reload);
-    _.gulp.watch(
+    watch(
+        `${dir.dist.themes}/**/*.php`
+    )
+        .on('add',    browserSync.reload)
+        .on('change', browserSync.reload)
+        .on('unlink', browserSync.reload);
+    const sSass = series(sass, browserSync.reload);
+    watch(
         `${dir.src.scss}/**/*.scss`
     )
         .on('add',    sSass)
         .on('change', sSass)
         .on('unlink', sSass);
-    const sImagemin = _.gulp.series(imagemin, _.browserSync.reload);
-    _.gulp.watch(
+    const sImagemin = series(imagemin, browserSync.reload);
+    watch(
         `${dir.src.img}/**/*.+(jpg|jpeg|png|gif|svg)`
     )
         .on('add',    sImagemin)
         .on('change', sImagemin)
         .on('unlink', sImagemin);
-    const sJs = _.gulp.series(jsBuild, _.browserSync.reload);
-    _.gulp.watch(
-        `${dir.src.js}/**/*.js`,
-        {
-            ignored: `${dir.src.js}/concat/**`
-        }
+    const sJs = series(jsBuild, browserSync.reload);
+    watch(
+        `${dir.src.js}/**/*.js`
     )
         .on('add',    sJs)
         .on('change', sJs)

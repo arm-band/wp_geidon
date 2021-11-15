@@ -18,7 +18,7 @@
         <p id="geiin"></p>
     </main>
     <footer class="l-footer">
-        © 2020 <?php bloginfo( 'name' ); ?>
+        © 2021 <?php bloginfo( 'name' ); ?>
     </footer>
     <?php wp_footer(); ?>
 </body>

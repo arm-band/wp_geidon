@@ -6,22 +6,27 @@
  */
 /* require
 *************************************** */
-const _         = require('./bin/plugin');
-const dir       = require('./bin/dir');
-const browsersync = require('./bin/tasks/browsersync');
-const imagemin = require('./bin/tasks/imagemin');
-const jsBuild = require('./bin/tasks/js');
-const scss = require('./bin/tasks/sass');
+const { series, parallel } = require('gulp');
+const browsersync          = require('./bin/tasks/browsersync');
+const imagemin             = require('./bin/tasks/imagemin');
+const jsBuild              = require('./bin/tasks/js');
+const scssTask             = require('./bin/tasks/sass');
 
-let taskArray = [scss, jsBuild, imagemin];
+let taskArray = [scssTask, jsBuild, imagemin];
 
-//view
-const taskServer = _.gulp.series(browsersync);
-exports.server = taskServer;
+exports.server = browsersync;
 
-//build
-const taskBuild = _.gulp.parallel(taskArray);
+//Scss
+exports.scss = scssTask;
+//js
+exports.js = parallel(jsBuild);
+//image
+exports.imagemin = parallel(imagemin);
+
+const taskBuild = parallel(taskArray);
 exports.build = taskBuild;
 
-//default
-exports.default = _.gulp.series(taskBuild, taskServer);
+//ビルドなし
+exports.view = browsersync;
+//gulpのデフォルトタスクで諸々を動かす
+exports.default = series(taskBuild, browsersync);
